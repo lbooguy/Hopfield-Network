@@ -23,7 +23,8 @@ class Network(QWidget):
     def Fill(self):#метод меняющий цвет кнопки на красный и изменяющий значений DRAW_ARRAY
             sender = self.sender()# информация о кпопке отправителе
             for i in range(self.Square_SizeGridle):
-                 if sender==self.buttons[i]:#если эта кнопка совпадает с одной i-той кпопкой в массиве кнопок то соответсвенно меняется значение DRAW_ARR                     self.DRAW_ARRAY[i]=1
+                 if sender==self.buttons[i]:#если эта кнопка совпадает с одной i-той кпопкой в массиве кнопок то соответсвенно меняется значение DRAW_ARR                   
+                        self.DRAW_ARRAY[i]=1
             sender.setStyleSheet('QPushButton {background-color: red; color: white;}')   #изменение цвета отправителя
 
 
