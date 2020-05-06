@@ -18,16 +18,20 @@ class Network(QWidget):
         self.DRAW_ARRAY=np.zeros(self.Square_SizeGridle,dtype=np.float32)#массив, который будет заполняться единицами по мере заполнения поля для рисования
         self.W=np.zeros((self.Square_SizeGridle,self.Square_SizeGridle),dtype=np.float32)#матрица весов
         self.initUI()
-       
- 
+
+    
     def Fill(self):#метод меняющий цвет кнопки на красный и изменяющий значений DRAW_ARRAY
             sender = self.sender()# информация о кпопке отправителе
             for i in range(self.Square_SizeGridle):
-                 if sender==self.buttons[i]:#если эта кнопка совпадает с одной i-той кпопкой в массиве кнопок то соответсвенно меняется значение DRAW_ARR                   
-                        self.DRAW_ARRAY[i]=1
-            sender.setStyleSheet('QPushButton {background-color: red; color: white;}')   #изменение цвета отправителя
+                 if sender==self.buttons[i]:#если эта кнопка совпадает с одной i-той кпопкой в массиве кнопок то соответсвенно меняется значение DRAW_ARR
+                     if self.DRAW_ARRAY[i]==0:
+                         self.DRAW_ARRAY[i]=1
+                         sender.setStyleSheet('QPushButton {background-color: red; color: ;}')   #изменение цвета отправителя
+                     else:
+                         self.DRAW_ARRAY[i]=0
+                         sender.setStyleSheet('QPushButton {background-color: ; color: red ;}')   #изменение цвета отправителя
 
-
+            
     def Clear(self):#метод очищающий поле для рисования
         for i in range(self.Square_SizeGridle):
             self.buttons[i].setStyleSheet('QPushButton {background-color:  ; color: red;}')#изменение цвета всех кнопок на стандартный
@@ -158,6 +162,7 @@ class Network(QWidget):
                 btn = QPushButton('', self)
                 btn.resize(45,45)
                 btn.move(45*i, 45*j)
+                btn.setMouseTracking(True)
                 btn.clicked.connect( self.Fill)
                 self.buttons.append(btn)
                 
